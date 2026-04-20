@@ -15,13 +15,3 @@ Let's do some maths! [](#eq:linear).
 
 y = mx + b
 :::
-
-## Computer Vision 
-[](#fig:eye)
-
-% A figure to explain computer vision
-:::{figure} https://itechindia.co/wp-content/uploads/2021/11/main-banner8.jpeg
-:label: fig:eye
-
-Computer vision
-:::
