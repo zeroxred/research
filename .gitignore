@@ -1,0 +1,27 @@
+# Build output
+_build/
+
+# Jupyter cache
+.ipynb_checkpoints
+**/.ipynb_checkpoints
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Optional: Sphinx build cache
+.doctrees/
