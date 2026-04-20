@@ -30,7 +30,7 @@ jobs:
 
       - name: Build the book
         run: |
-          jupyter-book build .
+          jupyter-book build
 
       - name: Debug build output
         run: |
