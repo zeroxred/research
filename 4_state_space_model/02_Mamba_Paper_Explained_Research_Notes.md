@@ -146,6 +146,8 @@ information according to the current token.
 
 This is the key innovation of the paper.
 
+Notice that A remains fixed to preserve the mathematical structure and efficiency of the SSM.
+
 ------------------------------------------------------------------------
 
 # 5. Why Synthetic Tasks?
@@ -358,3 +360,96 @@ forgotten.
 
 This single idea transforms SSMs from efficient recurrent models into
 competitive general-purpose foundation model backbones.
+
+------------------------------------------------------------------------
+
+# From S4 to Mamba: Why Selection Matters
+
+The key limitation of classical Structured State Space Models (SSMs), including S4, is that they are **Linear Time-Invariant (LTI)** systems.
+
+This means that every token is processed using exactly the same transition dynamics.
+
+Mathematically,
+
+$$
+A,\;B,\;C,\;\Delta
+$$
+
+remain fixed throughout the entire sequence.
+
+Although this property enables an efficient convolutional implementation, it also means that the model has **no mechanism to distinguish important tokens from irrelevant ones**.
+
+Every input influences memory in essentially the same way.
+
+For language, this assumption is too restrictive.
+
+Natural language contains highly informative tokens (names, entities, verbs) mixed with many low-information tokens (articles, punctuation, common words).
+
+An effective sequence model should not treat all of them equally.
+
+Instead, it should be able to answer questions such as:
+
+- Should this token be stored?
+- Should previous memory be overwritten?
+- Can this token be ignored?
+
+S4 cannot answer these questions because its dynamics never change.
+
+---
+
+## Mamba's Main Contribution: Selection
+
+Mamba removes the Linear Time-Invariant assumption.
+
+Instead of using fixed parameters,
+
+$$
+B,\;C,\;\Delta
+$$
+
+become functions of the current input,
+
+$$
+B(x_t),\qquad C(x_t),\qquad \Delta(x_t).
+$$
+
+As a consequence, the evolution of the hidden state depends not only on time, but also on **what the current token actually is**.
+
+This mechanism is called **selection**.
+
+Rather than processing every token identically, the model dynamically decides:
+
+- what information should enter memory,
+- what information should be forgotten,
+- which context should be preserved,
+- and which tokens can safely be ignored.
+
+The hidden state therefore becomes **content-aware** rather than purely time-dependent.
+
+---
+
+## Intuition
+
+Suppose the sequence is
+
+the  the  the  Harry  Potter  .  the
+
+A classical S4 processes every token with the same transition dynamics.
+
+Mamba, however, can implicitly behave as
+
+ignore → ignore → ignore → store → store → reset → ignore
+
+because each token generates different values of
+
+$$
+B(x),\;C(x),\;\Delta(x).
+$$
+
+The model is no longer forced to compress every token equally.
+
+Instead, it learns **what is worth remembering**.
+
+This single idea transforms SSMs from efficient recurrent models into competitive language models.
+
+It is the central innovation of the Mamba paper.
