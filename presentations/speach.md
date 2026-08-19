@@ -8,7 +8,7 @@ First, let me briefly introduce the roadmap of today's presentation.
 
 I will begin with my research background. Then, I will introduce the research context and explain the problem addressed by this PhD project.
 
-After that, I will present the scientific gap, objective and the central hypothesis of this research. And finally, I will describe the proposed three-stage methodology, the evaluation strategy, and the expected contributions of this work.
+After that, I will present the scientific gap, objective and the central hypothesis of this research. And finally, I will describe the proposed three-stage methodology, previous research problems, the evaluation strategy, and the expected contributions of this work.
 
 ==
 
